@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Nullius Combat Test</title>
+</head>
+<body>
+
+    
+
+    <section id = "seleccionar-personaje">
+        <h1>⚔Nullius Combat Test⚔</h1>
+        <h2>Elige A Tu Personaje: </h2>
+        <div class = "targetas">
+            <input type="radio" name="personaje" id="gladius">
+            <label class="targetas-personaje" for="gladius">
+                <p>Gladius</p>
+                <img src="./assets/Gladius.png" alt="">
+            </label>
+            <input type="radio" name="personaje" id="scutum">
+            <label class="targetas-personaje" for="scutum">
+                <p>Scutum</p>
+                <img src="./assets/Scutum.png" alt="">
+            </label>
+            <input type="radio" name="personaje" id="carius">
+            <label class="targetas-personaje" for="carius">
+                <p>Carius</p>
+                <img src="./assets/Carius.png" alt="">
+            </label>
+            
+        </div>
+        
+        <button id="boton-personaje">Seleccionar</button>
+    </section>
+
+    <section id = "seleccionar-habilidad">
+        <h1>⚔Nullius Combat Test⚔</h1>
+
+        <h2>Elige Tu Posicion: </h2>
+
+        <p><span id = "personaje-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</p>
+        <p><span id = "personaje-enemigo"></span> enemigo tiene <span id="vidas-enemigo">3</span> vidas</p>
+        <p class="botones-pos">
+            <button id="boton-ofensiva">Ofensiva 🤺</button>
+            <button id="boton-defensiva">Defensiva 🛡</button>
+            <button id="boton-furtiva">Furtiva 🐱‍👤</button>
+        </p>
+    </section>
+    <section id = "Mensajes">
+        <p></p>
+    </section>
+    <section id = "reiniciar">
+        <button id="boton-reiniciar">Reiniciar</button>
+    </section>
+    <script src="./Js/Nullius.js"></script>
+</body>
+</html>
