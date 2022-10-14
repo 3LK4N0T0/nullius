@@ -1,20 +1,20 @@
-let sectionSeleccionarHabilidad = document.getElementById("seleccionar-habilidad")
-let sectionReiniciar = document.getElementById("reiniciar")
-let botonPersonajeJugador = document.getElementById("boton-personaje")
-let botonOfensiva = document.getElementById("boton-ofensiva")
-let botonDefensiva = document.getElementById("boton-defensiva")
-let botonFurtiva = document.getElementById("boton-furtiva")
-let sectionSeleccionarPersonaje = document.getElementById('seleccionar-personaje')
-let inputGladius = document.getElementById('gladius')
-let inputScutum = document.getElementById('scutum')
-let inputCarius = document.getElementById('carius')
-let spanPersonajeJugador = document.getElementById("personaje-jugador")
-let botonReiniciar = document.getElementById("boton-reiniciar")
-let spanPersonajeEnemigo = document.getElementById("personaje-enemigo")
-let spanVidasJugador = document.getElementById("vidas-jugador")
-let spanVidasEnemigo = document.getElementById("vidas-enemigo")
-let sectionMensaje = document.getElementById("Mensajes")
-let parrafo = document.createElement("p")
+const sectionSeleccionarHabilidad = document.getElementById("seleccionar-habilidad")
+const sectionReiniciar = document.getElementById("reiniciar")
+const botonPersonajeJugador = document.getElementById("boton-personaje")
+const botonOfensiva = document.getElementById("boton-ofensiva")
+const botonDefensiva = document.getElementById("boton-defensiva")
+const botonFurtiva = document.getElementById("boton-furtiva")
+const sectionSeleccionarPersonaje = document.getElementById('seleccionar-personaje')
+const inputGladius = document.getElementById('gladius')
+const inputScutum = document.getElementById('scutum')
+const inputCarius = document.getElementById('carius')
+const spanPersonajeJugador = document.getElementById("personaje-jugador")
+const botonReiniciar = document.getElementById("boton-reiniciar")
+const spanPersonajeEnemigo = document.getElementById("personaje-enemigo")
+const spanVidasJugador = document.getElementById("vidas-jugador")
+const spanVidasEnemigo = document.getElementById("vidas-enemigo")
+const sectionMensaje = document.getElementById("Mensajes")
+const parrafo = document.createElement("p")
 
 sectionReiniciar.style.display = 'none'
 
@@ -23,6 +23,21 @@ let ataqueEnemigo
 let vidasEnemigo = 3
 let vidasJugador = 3
 let resultado
+
+class Personaje {
+    constructor(nombre, foto, vida) {
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+    }
+}
+
+let gladius = new Personaje('Gladius',"./assets/Gladius.png",3)
+let scutum = new Personaje('Scutum', './assets/Scutum.png', 3)
+let carius = new Personaje('Carius', './assets/Carius.png', 3)
+
+console.log(gladius)
+
 
 function iniciarJuego() {
         
