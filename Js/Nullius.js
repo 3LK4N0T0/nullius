@@ -5,21 +5,23 @@ const botonOfensiva = document.getElementById("boton-ofensiva")
 const botonDefensiva = document.getElementById("boton-defensiva")
 const botonFurtiva = document.getElementById("boton-furtiva")
 const sectionSeleccionarPersonaje = document.getElementById('seleccionar-personaje')
-const inputGladius = document.getElementById('gladius')
-const inputScutum = document.getElementById('scutum')
-const inputCarius = document.getElementById('carius')
 const spanPersonajeJugador = document.getElementById("personaje-jugador")
 const botonReiniciar = document.getElementById("boton-reiniciar")
 const spanPersonajeEnemigo = document.getElementById("personaje-enemigo")
 const spanVidasJugador = document.getElementById("vidas-jugador")
 const spanVidasEnemigo = document.getElementById("vidas-enemigo")
 const sectionMensaje = document.getElementById("Mensajes")
-const parrafo = document.createElement("p")
-
+const contenedorTargetas = document.getElementById("contenedorTargetas")
 sectionReiniciar.style.display = 'none'
 
+let personajes = []
 let ataqueJugador 
 let ataqueEnemigo 
+let opcionDePersonaje
+let inputGladius
+let inputScutum
+let inputCarius
+let personajeJugador
 let vidasEnemigo = 3
 let vidasJugador = 3
 let resultado
@@ -29,19 +31,58 @@ class Personaje {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.posiciones = []
     }
 }
 
-let gladius = new Personaje('Gladius',"./assets/Gladius.png",3)
-let scutum = new Personaje('Scutum', './assets/Scutum.png', 3)
-let carius = new Personaje('Carius', './assets/Carius.png', 3)
+let gladius = new Personaje('gladius',"./assets/Gladius.png",3)
+let scutum = new Personaje('scutum', './assets/Scutum.png', 3)
+let carius = new Personaje('carius', './assets/Carius.png', 3)
 
-console.log(gladius)
 
+gladius.posiciones.push(
+        {nombre: 'Ofensiva🤺', id: 'boton-ofensiva'},
+        {nombre: 'Ofensiva🤺', id: 'boton-ofensiva'},
+        {nombre: 'Ofensiva🤺', id: 'boton-ofensiva'},
+        {nombre: 'Defensiva 🛡', id: 'boton-defensiva'},
+        {nombre: 'Furtiva 🐱‍👤', id: 'boton-furtiva'}
+)
+
+scutum.posiciones.push(
+        {nombre: 'Ofensiva🤺', id: 'boton-ofensiva'},
+        {nombre: 'Defensiva 🛡', id: 'boton-defensiva'},
+        {nombre: 'Defensiva 🛡', id: 'boton-defensiva'},
+        {nombre: 'Defensiva 🛡', id: 'boton-defensiva'},
+        {nombre: 'Furtiva 🐱‍👤', id: 'boton-furtiva'}
+)
+
+carius.posiciones.push(
+        {nombre: 'Ofensiva🤺', id: 'boton-ofensiva'},      
+        {nombre: 'Defensiva 🛡', id: 'boton-defensiva'},
+        {nombre: 'Furtiva 🐱‍👤', id: 'boton-furtiva'},
+        {nombre: 'Furtiva 🐱‍👤', id: 'boton-furtiva'},
+        {nombre: 'Furtiva 🐱‍👤', id: 'boton-furtiva'}
+)
+
+personajes.push(gladius,scutum,carius)
 
 function iniciarJuego() {
         
         sectionSeleccionarHabilidad.style.display = 'none'
+        
+        personajes.forEach((personajes) => {
+                opcionDePersonaje = `
+                <input type="radio" name="personaje" id=${personajes.nombre} />
+                <label class="targetas-personaje" for=${personajes.nombre}>
+                        <p>${personajes.nombre}</p>
+                        <img src=${personajes.foto} alt=${personajes.nombre}>
+                </label>
+                `
+        contenedorTargetas.innerHTML += opcionDePersonaje
+        inputGladius = document.getElementById("gladius")
+        inputScutum = document.getElementById("scutum")
+        inputCarius = document.getElementById("carius")
+        })
         
         sectionReiniciar.style.display = 'none'
 
@@ -69,45 +110,42 @@ function aparecerSeleccionarHabilidad() {
 }
 
 function seleccionarPersonajeJugador () {
-        
-        
-        
-        
-        
-        
-
         if(inputGladius.checked) {
-        
-        spanPersonajeJugador.innerHTML ="Gladius"
+        spanPersonajeJugador.innerHTML = inputGladius.id 
+        personajeJugador = inputGladius.id
         aparecerSeleccionarHabilidad()
-        } else if (inputScutum.checked) {
-        
-        spanPersonajeJugador.innerHTML ="Scutum"
+        } else if (inputScutum.checked) { 
+        spanPersonajeJugador.innerHTML = inputScutum.id
+        personajeJugador = inputScutum.id
         aparecerSeleccionarHabilidad()
         } else if (inputCarius.checked) {
-        
-        spanPersonajeJugador.innerHTML ="Carius"
+        spanPersonajeJugador.innerHTML = inputCarius.id
+        personajeJugador = inputCarius.id
         aparecerSeleccionarHabilidad()
         } else {
         alert("Debes Seleccionar un personaje")
         }
+        extraerAtaques(personajeJugador)
         seleccionarPersonajeEnemigo()
         
         
 }
 
+function extraerAtaques(personajeJugador) {
+        let posiciones
+        for (let i = 0; i < personajes.length; i++) {
+                if (personajeJugador === personajes[i].nombre ) {
+                        posiciones = personajes[i].posiciones
+                }
+                
+        } 
+        console.log(posiciones)
+}
+
 function seleccionarPersonajeEnemigo () {
-        let personajeAleatorio = aleatorio(1,3)
+        let personajeAleatorio = aleatorio(0,personajes.length - 1)
         
-        if (personajeAleatorio ==1) {
-                spanPersonajeEnemigo.innerHTML = "Gladius"
-        } else if (personajeAleatorio == 2) {
-                spanPersonajeEnemigo.innerHTML = "Scutum"
-        } else {
-                spanPersonajeEnemigo.innerHTML = "Carius"
-        }
-
-
+        spanPersonajeEnemigo.innerHTML = personajes[personajeAleatorio].nombre
 }
 
 function posOfensiva() {
@@ -129,9 +167,6 @@ function posFurtiva() {
 }
 
 function combate() {
-        
-        
-
         if (ataqueJugador == ataqueEnemigo) {
           resultado = "EMPATE"
         } else if (ataqueJugador == "OFENSIVA" && ataqueEnemigo == "FURTIVA" || ataqueJugador == "DEFENSIVA" && ataqueEnemigo == "OFENSIVA" || ataqueJugador == "FURTIVA" && ataqueEnemigo == "DEFENSIVA") {
@@ -154,8 +189,6 @@ function revisarVidas() {
 }
 
 function crearMensaje() {
-        
-
         let parrafo = document.createElement("p")
         parrafo.innerHTML = "Te personaje tiene pos " + ataqueJugador + " y el oponente la pos " + ataqueEnemigo + "- "  + resultado
 
@@ -165,7 +198,7 @@ function crearMensaje() {
 
 function crearMensajeFinal(resultadoFinal) {
         
-
+        let parrafo = document.createElement("p")
         parrafo.innerHTML = resultadoFinal
 
         sectionMensaje.appendChild(parrafo)
